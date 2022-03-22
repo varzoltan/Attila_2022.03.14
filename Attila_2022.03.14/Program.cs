@@ -17,21 +17,27 @@ namespace Attila_2022._03._14
             public int futasi_ido { get; set; }
             public int osszesitett_ido { get { return uszasi_ido + kerekpar_ido + futasi_ido; } }
         }
+
+        static List<Adat> lista = new List<Adat>();
+        static void Beolvas()
+        {
+            Adat adatok = new Adat();
+            //int szam = int.Parse(File.ReadAllLines("TRIATLON.BE").First());
+            string[] triatlon = File.ReadAllLines("TRIATLON.BE");
+            for (int i = 1; i < triatlon.Length; i += 4)
+            {
+                adatok.Nev = triatlon[i];
+                adatok.uszasi_ido = int.Parse(triatlon[i + 1]);
+                adatok.kerekpar_ido = int.Parse(triatlon[i + 2]);
+                adatok.futasi_ido = int.Parse(triatlon[i + 3]);
+                lista.Add(adatok);
+            }
+        }
         static void Main(string[] args)
         {
             //1. feladat: Olvassa be a triatlon.be fájlból az adatokat!
-            Adat adatok = new Adat();
-            List<Adat> lista = new List<Adat>();
-            /*int szam = int.Parse(File.ReadAllLines("TRIATLON.BE").First());
-            foreach(string i in File.ReadAllLines("TRIATLON.BE").Skip(1))
-            {
-                adatok.Nev = i;
-                adatok.uszasi_ido = int.Parse(i.ToString());
-                adatok.kerekpar_ido = int.Parse(i);
-                adatok.futasi_ido = int.Parse(i);
-                lista.Add(adatok);
-            }*/
-            StreamReader olvas = new StreamReader("TRIATLON.BE");
+            Beolvas();
+            /*StreamReader olvas = new StreamReader("TRIATLON.BE");
             int szam = int.Parse(olvas.ReadLine());
             while (!olvas.EndOfStream)
             {
@@ -41,11 +47,21 @@ namespace Attila_2022._03._14
                 adatok.futasi_ido = int.Parse(olvas.ReadLine());
                 lista.Add(adatok);
             }
-            olvas.Close();
-            foreach (var i in lista)
+            olvas.Close();*/
+
+            //2.feladat
+            var gyoztesek = lista.OrderBy(x => x.osszesitett_ido);
+            /*foreach (var i in Enumerable.Range(0,3))
             {
-                Console.Write($"{i.Nev} {i.uszasi_ido} {i.kerekpar_ido} {i.futasi_ido}\n");
+                Console.Write($"{gyoztesek.ElementAt(i).Nev} {gyoztesek.ElementAt(i).osszesitett_ido}\n");
+            }*/
+            for (int i = 0;i<3;i++)
+            {
+                Console.WriteLine($"{gyoztesek.ElementAt(i).Nev}");
             }
+
+            //3.feladat
+
             Console.ReadKey();
         }
     }
