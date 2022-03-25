@@ -19,7 +19,7 @@ namespace Attila_2022._03._14
         }
 
         static List<Adat> lista = new List<Adat>();
-        static void Beolvas()
+        static void Beolvas()//Eljárás, ami csinál valamit! Nem kell, hogy értékkel térjen vissza!
         {
             Adat adatok = new Adat();
             //int szam = int.Parse(File.ReadAllLines("TRIATLON.BE").First());
@@ -33,10 +33,19 @@ namespace Attila_2022._03._14
                 lista.Add(adatok);
             }
         }
-        static void Main(string[] args)
+
+        static string konvertal_ido(int second)
+        {
+            int ora = second / 60 / 60;
+            int perc = (second / 60) - (ora * 60);
+            int masodperc = second % 60;
+            return $"{ora.ToString("00")}:{perc.ToString("00")}:{masodperc.ToString("00")}";
+        }
+        static void Main(string[] args)//Main
         {
             //1. feladat: Olvassa be a triatlon.be fájlból az adatokat!
             Beolvas();
+            Console.WriteLine("1.feladat: Beolvasás kész!");
             /*StreamReader olvas = new StreamReader("TRIATLON.BE");
             int szam = int.Parse(olvas.ReadLine());
             while (!olvas.EndOfStream)
@@ -50,6 +59,7 @@ namespace Attila_2022._03._14
             olvas.Close();*/
 
             //2.feladat
+            Console.WriteLine("\n2.feladat");
             var gyoztesek = lista.OrderBy(x => x.osszesitett_ido);
             /*foreach (var i in Enumerable.Range(0,3))
             {
@@ -57,11 +67,23 @@ namespace Attila_2022._03._14
             }*/
             for (int i = 0;i<3;i++)
             {
-                Console.WriteLine($"{gyoztesek.ElementAt(i).Nev}");
+                Console.WriteLine($"{gyoztesek.ElementAt(i).Nev}");              
             }
 
             //3.feladat
+            Console.WriteLine("\n3.feladat");
+            for (int i = 0; i < 1; i++)
+            {
+                Console.WriteLine($"Győztes: {gyoztesek.ElementAt(i).Nev}");
+                Console.WriteLine($"Átlagsebessége úszásban: {(1500 / (double)gyoztesek.ElementAt(i).uszasi_ido * 3.6).ToString("0.00")} km/h");
+                Console.WriteLine($"Átlagsebessége kerékpározásban: {4000 / (double)gyoztesek.ElementAt(i).kerekpar_ido * 3.6} km/h");
+                Console.WriteLine($"Átlagsebessége futásban:{1000 / (double)gyoztesek.ElementAt(i).futasi_ido * 3.6} km/h");
+            }
 
+            //4.feladat
+            Console.WriteLine("\n4.feladat");
+            Console.WriteLine(gyoztesek.ElementAt(0).osszesitett_ido);
+            Console.WriteLine($"{konvertal_ido(116)}");
             Console.ReadKey();
         }
     }
