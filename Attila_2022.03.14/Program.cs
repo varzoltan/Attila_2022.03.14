@@ -97,8 +97,8 @@ namespace Attila_2022._03._14
             int gyoztes_kerekpar_index = lista.FindIndex(x => x.kerekpar_ido == lista.Select(y => y.kerekpar_ido).Min());
             int gyoztes_futas_index = lista.FindIndex(x => x.futasi_ido == lista.Select(y => y.futasi_ido).Min());
             iro.WriteLine($"{lista[gyoztes_uszo_index].Nev} {konvertal_ido(lista[gyoztes_uszo_index].uszasi_ido)}");
-            iro.WriteLine($"{lista[gyoztes_kerekpar_index].Nev} {konvertal_ido(lista[gyoztes_kerekpar_index].uszasi_ido)}");
-            iro.WriteLine($"{lista[gyoztes_futas_index].Nev} {konvertal_ido(lista[gyoztes_futas_index].uszasi_ido)}");
+            iro.WriteLine($"{lista[gyoztes_kerekpar_index].Nev} {konvertal_ido(lista[gyoztes_kerekpar_index].kerekpar_ido)}");
+            iro.WriteLine($"{lista[gyoztes_futas_index].Nev} {konvertal_ido(lista[gyoztes_futas_index].futasi_ido)}");
             iro.Close();
             Console.WriteLine("A \"reszer.ki\" fájl kiírva!");
             Console.ReadKey();
