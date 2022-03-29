@@ -67,7 +67,7 @@ namespace Attila_2022._03._14
             }*/
             for (int i = 0;i<3;i++)
             {
-                Console.WriteLine($"{gyoztesek.ElementAt(i).Nev}");              
+                Console.WriteLine($"{i+1}. helyezett: {gyoztesek.ElementAt(i).Nev}");              
             }
 
             //3.feladat
@@ -76,14 +76,31 @@ namespace Attila_2022._03._14
             {
                 Console.WriteLine($"Győztes: {gyoztesek.ElementAt(i).Nev}");
                 Console.WriteLine($"Átlagsebessége úszásban: {(1500 / (double)gyoztesek.ElementAt(i).uszasi_ido * 3.6).ToString("0.00")} km/h");
-                Console.WriteLine($"Átlagsebessége kerékpározásban: {4000 / (double)gyoztesek.ElementAt(i).kerekpar_ido * 3.6} km/h");
-                Console.WriteLine($"Átlagsebessége futásban:{1000 / (double)gyoztesek.ElementAt(i).futasi_ido * 3.6} km/h");
+                Console.WriteLine($"Átlagsebessége kerékpározásban: {40000 / (double)gyoztesek.ElementAt(i).kerekpar_ido * 3.6} km/h");
+                Console.WriteLine($"Átlagsebessége futásban:{10000 / (double)gyoztesek.ElementAt(i).futasi_ido * 3.6} km/h");
             }
 
-            //4.feladat
-            Console.WriteLine("\n4.feladat");
-            Console.WriteLine(gyoztesek.ElementAt(0).osszesitett_ido);
-            Console.WriteLine($"{konvertal_ido(116)}");
+            //4,5,6.feladat
+            Console.WriteLine("\n4,5,6.feladat");
+            StreamWriter ir = new StreamWriter("triatlon.ki");
+            foreach (var adat in gyoztesek)
+            {
+                ir.WriteLine($"{adat.Nev} {konvertal_ido(adat.osszesitett_ido)}");
+            }
+            ir.Close();
+            Console.WriteLine("A \"triatlon.ki\" fájl kiírva!");
+
+            //7.feladat
+            Console.WriteLine("\n7.feladat");
+            StreamWriter iro = new StreamWriter("reszer.ki");
+            int gyoztes_uszo_index = lista.FindIndex(x => x.uszasi_ido == lista.Select(y => y.uszasi_ido).Min());
+            int gyoztes_kerekpar_index = lista.FindIndex(x => x.kerekpar_ido == lista.Select(y => y.kerekpar_ido).Min());
+            int gyoztes_futas_index = lista.FindIndex(x => x.futasi_ido == lista.Select(y => y.futasi_ido).Min());
+            iro.WriteLine($"{lista[gyoztes_uszo_index].Nev} {konvertal_ido(lista[gyoztes_uszo_index].uszasi_ido)}");
+            iro.WriteLine($"{lista[gyoztes_kerekpar_index].Nev} {konvertal_ido(lista[gyoztes_kerekpar_index].uszasi_ido)}");
+            iro.WriteLine($"{lista[gyoztes_futas_index].Nev} {konvertal_ido(lista[gyoztes_futas_index].uszasi_ido)}");
+            iro.Close();
+            Console.WriteLine("A \"reszer.ki\" fájl kiírva!");
             Console.ReadKey();
         }
     }
